@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/killa-beez/gopkgs/sets/builtins"
 	"github.com/labstack/echo"
 	"github.com/sridharavinash/guessygif/lib/movies"
 )
@@ -40,15 +41,37 @@ func main() {
 	if port == "" {
 		port = "8081"
 	}
-	e.Logger.Fatal(e.Start(":" + port))
-
+	addr := os.Getenv("TCP_ADDRESS")
+	if addr == "" {
+		addr = ":" + port
+	}
+	e.Logger.Fatal(e.Start(addr))
 }
 
 func indexRender(c echo.Context) error {
-	movie, _ := generator.GetRandomMovie()
-	data := map[string]string{
-		"imageUrl":    movie.GifURL,
-		"randomMovie": movie.Name,
+	options, answer := getOptions(4)
+	gif, err := generator.GetMovieGif(options[answer])
+	if err != nil {
+		return err
 	}
-	return c.Render(http.StatusOK, "index.html", data)
+	return c.Render(http.StatusOK, "index.html", viewData{
+		Choices:  options,
+		Correct:  answer,
+		ImageURL: gif,
+	})
+}
+
+type viewData struct {
+	ImageURL string
+	Choices  []string
+	Correct  int
+}
+
+//returns count titles and the index for the correct answer
+func getOptions(count int) ([]string, int) {
+	set := builtins.NewStringSet(count)
+	for set.Len() < count {
+		set.Add(generator.GetRandomMovie())
+	}
+	return set.Values(), generator.Intn(set.Len())
 }

@@ -5,20 +5,17 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"strings"
+	"time"
 
 	"github.com/sridharavinash/guessygif/lib/giphy"
 	"github.com/sridharavinash/guessygif/lib/moviedb"
 )
 
-type Movie struct {
-	Name   string
-	GifURL string
-}
-
 type MovieGenerator struct {
 	giphyPicker  *giphy.GiphyPicker
 	movieFetcher *moviedb.MovieFetcher
 	movieList    []string
+	rnd          *rand.Rand
 }
 
 func NewGenerator() (*MovieGenerator, error) {
@@ -33,34 +30,33 @@ func NewGenerator() (*MovieGenerator, error) {
 	}
 
 	return &MovieGenerator{
+		rnd:          rand.New(rand.NewSource(time.Now().UnixNano())),
 		giphyPicker:  picker,
 		movieFetcher: fetcher,
 		movieList:    getMovieNamesFromFile(),
 	}, nil
 }
 
-func (mg *MovieGenerator) GetRandomMovie() (*Movie, error) {
-	rint := rand.Intn(len(mg.movieList))
+func (mg *MovieGenerator) Intn(n int) int {
+	return mg.rnd.Intn(n)
+}
+
+func (mg *MovieGenerator) GetRandomMovie() string {
 	var randomMovie string
 	var err error
 	if mg.movieFetcher.CanFetch {
 		randomMovie, err = mg.movieFetcher.GetRandomMovieTitle()
-		if err != nil {
+		if err == nil {
+			randomMovie = ""
 			fmt.Printf("\nAn error occurred: %+v\n", err)
-			randomMovie = mg.movieList[rint]
 		}
-	} else {
-		randomMovie = mg.movieList[rint]
 	}
+	randomMovie = mg.movieList[mg.Intn(len(mg.movieList))]
+	return randomMovie
+}
 
-	imageUrl, _ := mg.giphyPicker.GetRandomGiphy(strings.ReplaceAll(randomMovie, " ", "+"))
-
-	movie := &Movie{
-		Name:   randomMovie,
-		GifURL: imageUrl,
-	}
-
-	return movie, nil
+func (mg *MovieGenerator) GetMovieGif(title string) (string, error) {
+	return mg.giphyPicker.GetRandomGiphy(strings.ReplaceAll(title, " ", "+"))
 }
 
 func getMovieNamesFromFile() []string {
