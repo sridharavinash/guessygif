@@ -46,7 +46,7 @@ func (mg *MovieGenerator) GetRandomMovie() string {
 	var err error
 	if mg.movieFetcher.CanFetch {
 		randomMovie, err = mg.movieFetcher.GetRandomMovieTitle()
-		if err == nil {
+		if err != nil {
 			randomMovie = ""
 			fmt.Printf("\nAn error occurred: %+v\n", err)
 		}
