@@ -51,7 +51,9 @@ func (mg *MovieGenerator) GetRandomMovie() string {
 			fmt.Printf("\nAn error occurred: %+v\n", err)
 		}
 	}
-	randomMovie = mg.movieList[mg.Intn(len(mg.movieList))]
+	if randomMovie == "" {
+		randomMovie = mg.movieList[mg.Intn(len(mg.movieList))]
+	}
 	return randomMovie
 }
 
