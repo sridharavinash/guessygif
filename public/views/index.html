@@ -46,7 +46,7 @@
         </div>
         <div class="row">
             <div class="eleven columns" style="margin-top: 25%">
-                <img src={{index . "imageUrl"}}; alt="">
+                <img src={{.ImageURL}}; alt="">
             </div>
         </div>
         <div class="row">
@@ -55,7 +55,10 @@
         </div>
         <div class="row">
           <div class="eleven columns">
-            <h3 class="showmovie" id="showmovie" style="display:none">{{index . "randomMovie"}}</h3>
+            {{range $i, $movieName := .Choices}}
+                <h3 {{if eq $i $.Correct}}class="correctanswer" {{end}}>{{$movieName}}</h3>
+            {{end}}
+            <h3 class="showmovie" id="showmovie" style="display:none">{{.RandomMovie}}</h3>
           </div>
         </div>
     </div>

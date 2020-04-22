@@ -6,12 +6,13 @@ import (
 	"html/template"
 	"io"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
 	"os"
 	"strings"
-	"math/rand"
 	"time"
 
+	"github.com/killa-beez/gopkgs/sets/builtins"
 	"github.com/labstack/echo"
 )
 
@@ -58,24 +59,48 @@ func main() {
 	if port == "" {
 		port = "8081"
 	}
-	e.Logger.Fatal(e.Start(":" + port))
-
+	addr := os.Getenv("TCP_ADDRESS")
+	if addr == "" {
+		addr = ":" + port
+	}
+	e.Logger.Fatal(e.Start(addr))
 }
 
 func indexRender(c echo.Context) error {
-	rint := rand.Intn(len(movies))
-	randomMovie := movies[rint]
-	imageUrl, _ := getRandomGiphy(strings.ReplaceAll(randomMovie, " ", "+"))
-	data := map[string]string{
-		"imageUrl": imageUrl,
-		"randomMovie" : randomMovie,
+	options, answer := getOptions(4, rand.Int63())
+	imageUrl, _ := getRandomGiphy(strings.ReplaceAll(options[answer], " ", "+"))
+	data := viewData{
+		ImageURL: imageUrl,
+		Correct:  answer,
+		Choices:  options,
 	}
 	return c.Render(http.StatusOK, "index.html", data)
 }
 
-func getMovieNames() []string{
+type viewData struct {
+	RandomMovie string
+	ImageURL    string
+	Choices     []string
+	Correct     int
+}
+
+//returns count titles and the index for the correct answer
+func getOptions(count int, seed int64) ([]string, int) {
+	rnd := rand.New(rand.NewSource(seed))
+	set := builtins.NewStringSet(count)
+	for set.Len() < count {
+		set.Add(movies[rnd.Intn(len(movies))])
+	}
+	options := set.Values()
+	rnd.Shuffle(len(options), func(i, j int) {
+		options[i], options[j] = options[j], options[i]
+	})
+	return options, rnd.Intn(count)
+}
+
+func getMovieNames() []string {
 	fdata, err := ioutil.ReadFile("movies.txt")
-	if err !=  nil{
+	if err != nil {
 		fmt.Println("error reading movie txt", err)
 		return []string{"The+Departed"}
 	}
