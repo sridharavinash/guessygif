@@ -2,7 +2,7 @@ The Seven Samurai
 Bonnie and Clyde
 Reservoir Dogs
 Airplane!
-Pan&#39;s Labyrinth
+Pan's Labyrinth
 Doctor Zhivago
 The Deer Hunter
 Close Encounters of the Third Kind
@@ -25,7 +25,7 @@ Ghostbusters
 Brokeback Mountain
 The Bridge on the River Kwai
 Blazing Saddles
-All the President&#39;s Men
+All the President's Men
 Young Frankenstein
 Almost Famous
 Vertigo
@@ -39,7 +39,7 @@ Groundhog Day
 North by Northwest
 West Side Story
 Amelie
-Thelma &amp; Louise
+Thelma & Louise
 Sunset Blvd.
 The Dark Knight
 Eternal Sunshine of the Spotless Mind
@@ -62,23 +62,23 @@ Fight Club
 The Shining
 When Harry Met Sally
 Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb
-Ferris Bueller&#39;s Day Off
+Ferris Bueller's Day Off
 A Clockwork Orange
 American Beauty
 Fargo
 The Empire Strikes Back
 The Princess Bride
-One Flew Over the Cuckoo&#39;s Nest
+One Flew Over the Cuckoo's Nest
 Blade Runner
 The Graduate
 The Breakfast Club
-Singin&#39; in the Rain
+Singin' in the Rain
 The Sound of Music
 Jaws
 Lawrence of Arabia
 The Silence of the Lambs
 Chinatown
-It&#39;s a Wonderful Life
+It's a Wonderful Life
 Goodfellas
 Annie Hall
 Apocalypse Now
@@ -88,7 +88,7 @@ Forrest Gump
 Raiders of the Lost Ark
 Back to the Future
 Star Wars
-Schindler&#39;s List
+Schindler's List
 2001: A Space Odyssey
 E.T. The Extra-Terrestrial
 The Godfather: Part II
@@ -103,7 +103,7 @@ The Departed
 American Pie
 The Phantom Menace
 Pulp Fiction
-Schindler&#39;s List
+Schindler's List
 Malcolm X
 Princess Mononoke
 Magnolia
@@ -128,7 +128,7 @@ The Wedding Banquet
 Breaking the Waves
 Toy Story
 Chasing Amy
-Rosencrantz &amp; Guildenstern Are Dead
+Rosencrantz & Guildenstern Are Dead
 Perfect Blue
 The Nightmare Before Christmas
 Being John Malkovich
@@ -141,10 +141,10 @@ Fear and Loathing in Las Vegas
 Philadelphia
 Raise the Red Lantern
 The Ice Storm
-Felicia&#39;s Journey
+Felicia's Journey
 Only Yesterday
 Reversal of Fortune
-Secrets &amp; Lies
+Secrets & Lies
 Unforgiven
 Romance
 Whisper of the Heart
@@ -170,7 +170,7 @@ Face/Off
 Reservoir Dogs
 The Big Lebowski
 The Insider
-Miller&#39;s Crossing
+Miller's Crossing
 Beauty and the Beast
 The Lion King
 The Sixth Sense
@@ -236,7 +236,7 @@ Gladiator
 Up
 The Lives of Others
 Shrek
-Pan&#39;s Labyrinth
+Pan's Labyrinth
 The Prestige
 Amélie
 Little Miss Sunshine
@@ -264,7 +264,7 @@ Fantastic Mr. Fox
 A Moment to Remember
 American Gangster
 Iron Man
-Howl&#39;s Moving Castle
+Howl's Moving Castle
 Star Trek
 Juno
 In the Loop
@@ -301,4 +301,4 @@ X2: X-Men United
 A Very Long Engagement
 A Beautiful Mind
 Kung Fu Hustle
-Before the Devil Knows You&#39;re Dead
+Before the Devil Knows You're Dead
