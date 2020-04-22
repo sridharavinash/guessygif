@@ -58,7 +58,6 @@
             {{range $i, $movieName := .Choices}}
                 <h3 {{if eq $i $.Correct}}class="correctanswer" {{end}}>{{$movieName}}</h3>
             {{end}}
-            <h3 class="showmovie" id="showmovie" style="display:none">{{.RandomMovie}}</h3>
           </div>
         </div>
     </div>
