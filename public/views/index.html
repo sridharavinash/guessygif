@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Guessy Gif</title>
+  <meta name="description" content="Guess the gif">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+       –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+       –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+       –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="static/css/normalize.css">
+  <link rel="stylesheet" href="static/css/skeleton.css">
+
+  <!-- Favicon
+       –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="static/images/favicon.png">
+
+</head>
+<body>
+
+  <!-- JS
+   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script type="text/javascript" src="static/js/showmovie.js"></script>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+        <div class="row">
+            <div class="eleven columns">
+                <h3>Guessy Gif - Guess the movie in the gif</h3>
+            </div>
+            <div class="one column">
+                <a href="https://github.com/sridharavinash/guessygif">GitHub</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="eleven columns" style="margin-top: 25%">
+                <img src={{index . "imageUrl"}}; alt="">
+            </div>
+        </div>
+        <div class="row">
+          <button class="button-primary" value="Refresh Page" onClick="window.location.reload()">Again!</button>
+          <button class="button-primary" value="Show me" onClick="showMovie()">Show me</button>
+        </div>
+        <div class="row">
+          <div class="eleven columns">
+            <h3 class="showmovie" id="showmovie" style="display:none">{{index . "randomMovie"}}</h3>
+          </div>
+        </div>
+    </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
