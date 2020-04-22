@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"math/rand"
-	"os"
 	"strings"
 
 	"github.com/sridharavinash/guessygif/lib/giphy"
+	"github.com/sridharavinash/guessygif/lib/moviedb"
 )
 
 type Movie struct {
@@ -16,30 +16,41 @@ type Movie struct {
 }
 
 type MovieGenerator struct {
-	giphyPicker   *giphy.GiphyPicker
-	MovieDBAPIKey string
-	movieList     []string
+	giphyPicker  *giphy.GiphyPicker
+	movieFetcher *moviedb.MovieFetcher
+	movieList    []string
 }
 
 func NewGenerator() (*MovieGenerator, error) {
-	//Don't care if this is empty, will fallback to using list
-	moviedb_api_key := os.Getenv("MOVIEDB_API_KEY")
-
 	picker, err := giphy.NewPicker()
 	if err != nil {
 		return nil, err
 	}
 
+	fetcher, err := moviedb.NewFetcher()
+	if err != nil {
+		return nil, err
+	}
+
 	return &MovieGenerator{
-		giphyPicker:   picker,
-		MovieDBAPIKey: moviedb_api_key,
-		movieList:     GetMovieNamesFromFile(),
+		giphyPicker:  picker,
+		movieFetcher: fetcher,
+		movieList:    getMovieNamesFromFile(),
 	}, nil
 }
 
 func (mg *MovieGenerator) GetRandomMovie() (*Movie, error) {
 	rint := rand.Intn(len(mg.movieList))
-	randomMovie := mg.movieList[rint]
+	var randomMovie string
+	var err error
+	if mg.movieFetcher.CanFetch {
+		randomMovie, err = mg.movieFetcher.GetRandomMovieTitle()
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		randomMovie = mg.movieList[rint]
+	}
 
 	imageUrl, _ := mg.giphyPicker.GetRandomGiphy(strings.ReplaceAll(randomMovie, " ", "+"))
 
@@ -51,7 +62,7 @@ func (mg *MovieGenerator) GetRandomMovie() (*Movie, error) {
 	return movie, nil
 }
 
-func GetMovieNamesFromFile() []string {
+func getMovieNamesFromFile() []string {
 	fdata, err := ioutil.ReadFile("movies.txt")
 	if err != nil {
 		fmt.Println("error reading movie txt", err)
