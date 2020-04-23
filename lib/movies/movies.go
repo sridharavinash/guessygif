@@ -57,8 +57,12 @@ func (mg *MovieGenerator) GetRandomMovie() string {
 	return randomMovie
 }
 
-func (mg *MovieGenerator) GetMovieGif(title string) (string, error) {
-	return mg.giphyPicker.GetRandomGiphy(strings.ReplaceAll(title, " ", "+"))
+func (mg *MovieGenerator) GetMovieGif(title string, seed int) (string, error) {
+	giphyReq := giphy.GiphyRequest{
+		Title: strings.ReplaceAll(title, " ", "+"),
+		Seed:  seed,
+	}
+	return mg.giphyPicker.GetRandomGiphy(giphyReq)
 }
 
 func getMovieNamesFromFile() []string {

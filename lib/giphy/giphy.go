@@ -41,9 +41,21 @@ func NewPicker() (*GiphyPicker, error) {
 	}, nil
 }
 
-func (p *GiphyPicker) GetRandomGiphy(s string) (string, error) {
-	roffset := rand.Intn(3)
-	url := fmt.Sprintf("https://api.giphy.com/v1/gifs/search?api_key=%s&q=%s&limit=1&offset=%d&rating=G&lang=en", p.ApiKey, s, roffset)
+type GiphyRequest struct {
+	Title string
+	Seed  int
+}
+
+func (p *GiphyPicker) GetRandomGiphy(greq GiphyRequest) (string, error) {
+	randomSeed := 3
+	if greq.Seed > 0 {
+		randomSeed = greq.Seed
+	}
+
+	title := greq.Title
+
+	roffset := rand.Intn(randomSeed)
+	url := fmt.Sprintf("https://api.giphy.com/v1/gifs/search?api_key=%s&q=%s&limit=1&offset=%d&rating=G&lang=en", p.ApiKey, title, roffset)
 
 	payload := strings.NewReader("{}")
 

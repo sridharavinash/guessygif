@@ -60,6 +60,7 @@ func (f *MovieFetcher) GetRandomMovieTitle() (string, error) {
 	err := f.fetchFromApi(url, resp)
 	if err != nil {
 		fmt.Println("Occurred an error: ", err)
+		f.CanFetch = false
 		return "", err
 	}
 
