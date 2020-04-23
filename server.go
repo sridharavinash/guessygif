@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"io"
 	"math/rand"
@@ -36,6 +37,7 @@ func main() {
 	e.Renderer = t
 
 	e.GET("/", indexRender)
+	e.GET("/refresh", refreshGif)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -50,18 +52,33 @@ func main() {
 
 func indexRender(c echo.Context) error {
 	options, answer := getOptions(4)
-	gif, err := generator.GetMovieGif(options[answer])
+	title := options[answer]
+	gif, err := generator.GetMovieGif(title, 3)
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 	return c.Render(http.StatusOK, "index.html", viewData{
+		Title:    title,
 		Choices:  options,
 		Correct:  answer,
 		ImageURL: gif,
 	})
 }
 
+func refreshGif(c echo.Context) error {
+	title := c.QueryParam("title")
+	gif, err := generator.GetMovieGif(title, 10)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	return c.String(http.StatusOK, gif)
+}
+
 type viewData struct {
+	Title    string
 	ImageURL string
 	Choices  []string
 	Correct  int

@@ -1,0 +1,11 @@
+.img-container {
+	min-height: 200px;
+	max-height: 500px;
+}
+
+.img-container img {
+	max-width: 75%;
+	height: 400px;
+	object-fit: contain;
+	margin: 50px 0;
+}

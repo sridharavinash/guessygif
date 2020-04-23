@@ -21,6 +21,7 @@
        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="static/css/normalize.css">
   <link rel="stylesheet" href="static/css/skeleton.css">
+  <link rel="stylesheet" href="static/css/custom.css">
 
   <!-- Favicon
        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -45,10 +46,11 @@
         <div class="row">
           <button class="button-primary" value="Refresh Page" onClick="window.location.reload()">Again!</button>
           <button class="button-primary" value="Show me" onClick="showMovie()">Show me</button>
+					<button class="button-secondary" value="Try another gif" onClick="refreshGif('{{.Title}}')">Try another gif</button>
         </div>
         <div class="row">
-            <div class="eleven columns">
-                <img src={{.ImageURL}}; alt="">
+            <div class="img-container eleven columns">
+							<img id="js-guess-gif" src={{.ImageURL}}; alt="">
             </div>
         </div>
         <div class="row">
